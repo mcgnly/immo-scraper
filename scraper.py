@@ -68,6 +68,14 @@ def scrape_contents(w_l, list_of_data):
 
 new_apartment_data = get_subscribers()
 data_txt = open('data.txt', 'r+')
-old_apartment_data = json.load(data_txt)
-combo_data = {**old_apartment_data, **new_apartment_data}
+first_char = data_txt.read(1)
+
+# deal with empty file
+if first_char:
+  print(first_char)
+  old_apartment_data = json.load(data_txt)
+  combo_data = {**old_apartment_data, **new_apartment_data}
+else:
+  combo_data = new_apartment_data
+
 json.dump(combo_data, data_txt)
